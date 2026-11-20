@@ -27,8 +27,8 @@ import zlib
 LIMITS = {"manifest.json": 128 * 1024, "provider.js": 3 * 1024 * 1024, "icon.png": 256 * 1024}
 PACKAGE_LIMIT = 4 * 1024 * 1024
 CAPABILITIES = ("searchTracks", "getTrackStreamUrl", "getAlbum", "getArtist", "getPlaylist")
-FEATURES = ("fetch@1", "settings@1", "streamResolution@1", "packagedIcon@1", "qualityOptions@1", "appAttestation@1")
-EXTENSION_FEATURES = ("signedSession@3", "sessionGrant@1", "downloadSegments@1", "preparedContext@1", "appAttestation@1")
+FEATURES = ("fetch@1", "settings@1", "streamResolution@1", "packagedIcon@1", "qualityOptions@1", "appAttestation@1", "songContext@1")
+EXTENSION_FEATURES = ("signedSession@3", "sessionGrant@1", "downloadSegments@1", "preparedContext@1", "appAttestation@1", "songContext@1")
 TYPES = {
     "text": "text", "string": "text", "url": "text", "password": "text",
     "number": "number", "integer": "number", "boolean": "boolean", "switch": "boolean",
