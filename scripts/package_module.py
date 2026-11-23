@@ -26,7 +26,9 @@ import zlib
 
 LIMITS = {"manifest.json": 128 * 1024, "provider.js": 3 * 1024 * 1024, "icon.png": 256 * 1024}
 PACKAGE_LIMIT = 4 * 1024 * 1024
-CAPABILITIES = ("searchTracks", "getTrackStreamUrl", "getAlbum", "getArtist", "getPlaylist")
+CAPABILITIES = ("searchTracks", "getTrackStreamUrl", "getAlbum", "getArtist", "getPlaylist", "onPlaybackError",
+                "getLyrics", "getTrackMetadata", "getCanvas")
+CONTENT_CAPABILITIES = ("getLyrics", "getTrackMetadata", "getCanvas")
 FEATURES = ("fetch@1", "settings@1", "streamResolution@1", "packagedIcon@1", "qualityOptions@1", "appAttestation@1", "songContext@1")
 EXTENSION_FEATURES = ("signedSession@3", "sessionGrant@1", "downloadSegments@1", "preparedContext@1", "appAttestation@1", "songContext@1")
 TYPES = {
@@ -352,8 +354,15 @@ def validate(manifest, entries, issues, app_version=None, verify_hashes=False):
                 if feature not in (EXTENSION_FEATURES if extension else FEATURES):
                     issue(issues, "module.requiredRuntimeFeatures", f"Unsupported host feature: {feature}")
     capabilities = string_list(module.get("capabilities", []), "module.capabilities", issues)
-    if len(set(capabilities)) != len(capabilities) or any(item not in CAPABILITIES for item in capabilities) or not set(CAPABILITIES[:2]).issubset(capabilities):
-        issue(issues, "module.capabilities", "Declare unique supported methods, including searchTracks and getTrackStreamUrl")
+    audio = sum(item in CAPABILITIES[:2] for item in capabilities)
+    if len(set(capabilities)) != len(capabilities) or any(item not in CAPABILITIES for item in capabilities):
+        issue(issues, "module.capabilities", "Declare unique supported methods")
+    elif audio == 1:
+        issue(issues, "module.capabilities", "Declare searchTracks and getTrackStreamUrl together")
+    elif extension and audio == 0:
+        issue(issues, "module.capabilities", "The extension runtime requires searchTracks and getTrackStreamUrl")
+    elif audio == 0 and (not any(item in CONTENT_CAPABILITIES for item in capabilities) or "onPlaybackError" in capabilities):
+        issue(issues, "module.capabilities", "Declare audio methods or at least one of getLyrics, getTrackMetadata, getCanvas; onPlaybackError requires audio")
     minimum = module.get("minAppVersion", "")
     if isinstance(minimum, str) and minimum.strip():
         if not re.fullmatch(r"[0-9]{1,6}\.[0-9]{1,6}\.[0-9]{1,6}", minimum):
