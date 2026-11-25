@@ -129,6 +129,35 @@
       ],
       "downloads": 0,
       "updated_at": "2026-11-25T00:00:00Z"
+    },
+    {
+      "id": "moe.voidtune.provider.spotify",
+      "name": "spotify",
+      "display_name": "Spotify",
+      "version": "1.0.0",
+      "author": "mjurran-zaba & sonic-liberation",
+      "description": "Provides Spotify track search, comprehensive album metadata, and vertical Canvas video animation loops decoupled from the core application.",
+      "download_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/dist/spotify.arch",
+      "sha256": "a4e49d416fa6cdbd0d4b71a9ec94f43ea5fd92efea07e37636c0956bea0e101a",
+      "icon_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/icon/spotify.png",
+      "category": "metadata",
+      "tags": [
+        "spotify",
+        "metadata",
+        "canvas",
+        "backup"
+      ],
+      "labels": [
+        "Spotify",
+        "Metadata",
+        "Canvas"
+      ],
+      "capabilities": [
+        "getTrackMetadata",
+        "getCanvas"
+      ],
+      "downloads": 0,
+      "updated_at": "2026-11-25T00:00:00Z"
     }
   ]
 }

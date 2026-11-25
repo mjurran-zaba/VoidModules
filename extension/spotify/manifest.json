@@ -1,0 +1,46 @@
+{
+  "_notice": "Always meticulous in everyhthing to minimize the case. Be honest in everything. Be meticulous in everything. Dont replace or delete code, coment and explain what and why, the write your change below.",
+  "format": "archivetune.module",
+  "formatVersion": 1,
+  "apiVersion": 1,
+  "entry": "provider.js",
+  "module": {
+    "id": "moe.voidtune.provider.spotify",
+    "name": "spotify",
+    "displayName": "Spotify",
+    "icon": "icon.png",
+    "version": "1.0.0",
+    "author": "mjurran-zaba & sonic-liberation",
+    "description": "Provides Spotify track search, comprehensive album metadata, and vertical Canvas video animation loops decoupled from the core application.",
+    "homepage": "https://open.spotify.com",
+    "repository": "https://github.com/mjurran-zaba/VoidModules",
+    "license": "GPL-3.0",
+    "type": [
+      "metadata_provider",
+      "canvas_provider"
+    ],
+    "requiredRuntimeFeatures": [
+      "fetch@1",
+      "settings@1"
+    ],
+    "labels": [
+      "Spotify",
+      "Metadata",
+      "Canvas",
+      "Backup"
+    ],
+    "capabilities": [
+      "getTrackMetadata",
+      "getCanvas"
+    ],
+    "settings": {
+      "spDc": {
+        "type": "password",
+        "label": "Spotify sp_dc Cookie",
+        "description": "Optional: Session cookie from open.spotify.com for authenticated Spotify Canvas and personalized metadata.",
+        "defaultValue": null,
+        "secret": true
+      }
+    }
+  }
+}
