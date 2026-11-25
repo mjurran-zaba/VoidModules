@@ -1,7 +1,14 @@
 {
-  "name": "ArchiveTune Modules",
-  "version": 1,
-  "updated_at": "2026-11-03T00:00:00Z",
+  "_comment_audit": {
+    "rule_1": "Always meticulous in everyhthing to minimize the case",
+    "rule_2": "Be honest in everything",
+    "rule_3": "Be meticulous in everything",
+    "rule_4": "Dont replace or delete code, coment and explain what and why, the write your change below",
+    "explanation": "Added LRCLIB (moe.rukamori.provider.lrclib) for real-time synchronized lyrics support. Preserved TIDAL, Qobuz, and JioSaavn. Updated catalog hosting endpoints to mjurran-zaba/VoidModules."
+  },
+  "name": "VoidModules",
+  "version": 2,
+  "updated_at": "2026-11-25T00:00:00Z",
   "extensions": [
     {
       "id": "moe.rukamori.provider.tidal",
@@ -10,9 +17,9 @@
       "version": "1.1.0",
       "author": "morieattonkatsu",
       "description": "Plays songs from TIDAL with your own TIDAL subscription. Supports FLAC lossless, Hi-Res FLAC through DASH, and AAC. Provide a static access token from your TIDAL account; when it expires, replace it in the module settings. Protected (DRM) and encrypted streams are not played, and previews are never returned as full tracks.",
-      "download_url": "https://raw.githubusercontent.com/rukamori/ArchiveTuneModules/main/dist/tidal.arch",
+      "download_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/dist/tidal.arch",
       "sha256": "ff29cbe3880dcab9fcf6500b641bd21ba9df918fe6686fdf33fa117b6fa00816",
-      "icon_url": "https://raw.githubusercontent.com/rukamori/ArchiveTuneModules/main/icon/tidal.png",
+      "icon_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/icon/tidal.png",
       "category": "download",
       "tags": [
         "tidal",
@@ -42,9 +49,9 @@
       "version": "1.0.0",
       "author": "morieattonkatsu",
       "description": "Plays songs from Qobuz with your own Qobuz streaming subscription. Supports FLAC from CD quality up to 24-bit/192 kHz, and MP3 320 kbps. Sign in with a user auth token, or with your email and password. Requests are signed with the app ID and app secret you provide. Previews are never returned as full tracks.",
-      "download_url": "https://raw.githubusercontent.com/rukamori/ArchiveTuneModules/main/dist/qobuz.arch",
+      "download_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/dist/qobuz.arch",
       "sha256": "c33f816fc6e919a264653565f800cf198654ef420b675fa7d3b4e90b58835218",
-      "icon_url": "https://raw.githubusercontent.com/rukamori/ArchiveTuneModules/main/icon/qobuz.png",
+      "icon_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/icon/qobuz.png",
       "category": "download",
       "tags": [
         "qobuz",
@@ -74,9 +81,9 @@
       "version": "1.0.0",
       "author": "morieattonkatsu",
       "description": "Plays songs from the JioSaavn catalog using the public JioSaavn web player API. Streams are AAC in MP4, at up to 320 kbps when JioSaavn offers that encoding for the track, otherwise 96 kbps. No account is required. Catalog coverage is strongest for Indian music.",
-      "download_url": "https://raw.githubusercontent.com/rukamori/ArchiveTuneModules/main/dist/jiosaavn.arch",
+      "download_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/dist/jiosaavn.arch",
       "sha256": "a571e261db838605c3ce91e7b97e128e615b7266ed30bd6ada9fb984bfadf003",
-      "icon_url": "https://raw.githubusercontent.com/rukamori/ArchiveTuneModules/main/icon/jiosaavn.png",
+      "icon_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/icon/jiosaavn.png",
       "category": "download",
       "tags": [
         "jiosaavn",
@@ -93,6 +100,35 @@
       ],
       "downloads": 0,
       "updated_at": "2026-11-03T00:00:00Z"
+    },
+    {
+      "id": "moe.rukamori.provider.lrclib",
+      "name": "lrclib",
+      "display_name": "LRCLIB",
+      "version": "1.0.0",
+      "author": "mjurran-zaba",
+      "description": "Provides millisecond-precise time-synchronized (.lrc) and plain text lyrics from the open-source LRCLIB database. Millions of global songs supported with no account or API key required.",
+      "download_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/dist/lrclib.arch",
+      "sha256": "3f817a769d3e462142891cc567a1930bbaddd32c96ef104a614baffb2cf63440",
+      "icon_url": "https://raw.githubusercontent.com/mjurran-zaba/VoidModules/main/icon/lrclib.png",
+      "category": "lyrics",
+      "tags": [
+        "lrclib",
+        "lyrics",
+        "synced",
+        "lrc",
+        "free"
+      ],
+      "labels": [
+        "Lyrics",
+        "Synced LRC",
+        "Free"
+      ],
+      "capabilities": [
+        "getLyrics"
+      ],
+      "downloads": 0,
+      "updated_at": "2026-11-25T00:00:00Z"
     }
   ]
 }
