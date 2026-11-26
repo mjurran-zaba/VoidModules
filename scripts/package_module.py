@@ -372,8 +372,21 @@ def validate(manifest, entries, issues, app_version=None, verify_hashes=False):
     script = entries.get("provider.js")
     if script is not None:
         try:
-            if not script.decode("utf-8-sig").strip():
+            # [AUDIT-CHECK 2026-11-26]: Enhance entry script check to verify non-empty text and ensure exported capabilities match manifest declarations.
+            # Original:
+            # if not script.decode("utf-8-sig").strip():
+            #     issue(issues, "provider.js", "The entry script is empty")
+            script_text = script.decode("utf-8-sig")
+            if not script_text.strip():
                 issue(issues, "provider.js", "The entry script is empty")
+            elif not extension:
+                export_matches = re.findall(r"module\.exports\s*=\s*\{([^}]+)\}", script_text)
+                if export_matches:
+                    raw_exports = export_matches[-1]
+                    exported_caps = [k.strip() for k in re.findall(r"([A-Za-z0-9_$]+)", raw_exports) if k.strip() in CAPABILITIES]
+                    if set(exported_caps) != set(capabilities):
+                        issue(issues, "module.capabilities",
+                              f"Declared capabilities {capabilities} do not match exported functions {exported_caps} in provider.js (causes Provider capability mismatch QuickJsException)")
         except UnicodeError:
             issue(issues, "provider.js", "Encode the script as UTF-8")
     if "icon" in module:

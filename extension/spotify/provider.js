@@ -157,8 +157,19 @@ async function getCanvas(song, context = null) {
   };
 }
 
+// [AUDIT-FIX 2026-11-26]: ModulePackageReader strictly enforces that provider.js exported
+// functions match manifest.json capabilities (actual.length === metadata.capabilities.length).
+// Manifest declares ['getTrackMetadata', 'getCanvas']. Exporting searchTracks caused
+// TypeError: Provider capability mismatch (QuickJsException at stage=PROVIDER; failure=EXECUTION).
+// searchTracks remains available internally for getTrackMetadata and getCanvas, but is omitted from module.exports.
+/*
 module.exports = {
   searchTracks,
+  getTrackMetadata,
+  getCanvas,
+};
+*/
+module.exports = {
   getTrackMetadata,
   getCanvas,
 };
